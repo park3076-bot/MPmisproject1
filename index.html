@@ -1,0 +1,1090 @@
+<!DOCTYPE html>
+<html lang="en">
+	<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Max Parker — Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#0d0d0d;
+      --surface:#0f1113;
+      --muted:#9aa3b2;
+      --text:#e6eef8;
+      --accent:#7c3aed;
+      --accent-dark:#4c1d95;
+      --glass: rgba(255,255,255,0.03);
+      --card: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      --header-height: 80px;
+      font-synthesis: none;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%;margin:0;background:var(--bg);color:var(--text);font-family:Inter,system-ui,Segoe UI,Roboto,Arial; -webkit-font-smoothing:antialiased;}
+    a{color:var(--accent);text-decoration:none}
+
+    /* Stars Animation */
+    @keyframes twinkle {
+      0%, 100% { opacity: 0.3; }
+      50% { opacity: 1; }
+    }
+
+    .stars {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: var(--header-height);
+      pointer-events: none;
+      overflow: hidden;
+    }
+
+    .star {
+      position: absolute;
+      background: white;
+      border-radius: 50%;
+      animation: twinkle var(--twinkle-duration, 3s) ease-in-out infinite;
+      animation-delay: var(--twinkle-delay, 0s);
+    }
+
+    /* Layout */
+    .wrap{max-width:1100px;margin:0 auto;padding:28px}
+    header{
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: var(--header-height);
+      background: linear-gradient(to bottom, 
+        rgba(13,13,13,0.95), 
+        rgba(13,13,13,0.85)
+      );
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(255,255,255,0.03);
+      z-index: 1000;
+      transition: transform 0.3s ease;
+    }
+    
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 100%;
+      padding: 0 28px;
+    }
+
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:14px;
+      transition: transform 0.3s ease;
+    }
+    
+    .brand:hover {
+      transform: translateY(-2px);
+    }
+
+    .logo{
+      width:54px;
+      height:54px;
+      border-radius:12px;
+      background:linear-gradient(135deg,var(--accent),var(--accent-dark));
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-weight:700;
+      color:white;
+      font-family:Poppins;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .logo::after {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(
+        circle at center,
+        rgba(255,255,255,0.2) 0%,
+        transparent 50%
+      );
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .logo:hover::after {
+      opacity: 1;
+    }
+
+    nav{
+      display:flex;
+      gap:16px;
+    }
+
+    .nav-link{
+      padding: 10px 16px;
+      border-radius: 12px;
+      color: var(--muted);
+      font-weight: 600;
+      position: relative;
+      transition: all 0.3s ease;
+    }
+
+    .nav-link::before {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 50%;
+      width: 0;
+      height: 2px;
+      background: var(--accent);
+      transform: translateX(-50%);
+      transition: width 0.3s ease;
+    }
+
+    .nav-link:hover {
+      color: var(--text);
+    }
+
+    .nav-link:hover::before {
+      width: 30px;
+    }
+
+    .nav-link.active{
+      background: linear-gradient(90deg, 
+        rgba(124,58,237,0.15), 
+        rgba(124,58,237,0.08)
+      );
+      color: var(--text);
+      box-shadow: 
+        0 6px 20px rgba(124,58,237,0.08),
+        0 2px 4px rgba(124,58,237,0.04);
+    }
+
+    /* Header Scroll Effect */
+    header.scrolled {
+      transform: translateY(-100%);
+    }
+    
+    header.scroll-up {
+      transform: translateY(0);
+    }
+
+    /* Main */
+    .hero{
+      display: grid;
+      grid-template-columns: 1fr 420px;
+      gap: 40px;
+      align-items: center;
+      margin-top: calc(var(--header-height) + 40px);
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeInUp 1s ease forwards;
+    }
+
+    @keyframes fadeInUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .hero .content h1{
+      font-family: Poppins;
+      font-size: clamp(40px, 5vw, 56px);
+      margin: 0 0 12px;
+      line-height: 1.1;
+      background: linear-gradient(
+        90deg,
+        var(--text) 0%,
+        rgba(230,238,248,0.9) 100%
+      );
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .tag{
+      color: var(--muted);
+      margin-bottom: 24px;
+      font-size: 1.2rem;
+      opacity: 0;
+      transform: translateY(10px);
+      animation: fadeInUp 1s ease forwards 0.3s;
+    }
+
+    .intro{
+      color: var(--muted);
+      line-height: 1.7;
+      font-size: 1.1rem;
+      opacity: 0;
+      transform: translateY(10px);
+      animation: fadeInUp 1s ease forwards 0.6s;
+    }
+
+    .h-card{
+      background: var(--surface);
+      border: 1px solid rgba(255,255,255,0.04);
+      padding: 24px;
+      border-radius: 16px;
+      box-shadow: 0 20px 40px rgba(2,6,23,0.8);
+      transform: translateY(20px);
+      opacity: 0;
+      animation: fadeInUp 1s ease forwards 0.9s;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .h-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 25px 50px rgba(2,6,23,0.9);
+    }
+
+    .portrait{
+      width: 100%;
+      height: calc(100%);
+      border-radius: 12px;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.3s ease;
+    }
+
+    .portrait:hover {
+      transform: scale(1.02);
+    }
+
+    .hobby-list{
+      display: flex;
+      gap: 20px;
+      margin-top: 24px;
+      opacity: 0;
+      transform: translateY(10px);
+      animation: fadeInUp 1s ease forwards 1.2s;
+    }
+
+    .hobby{
+      flex: 1;
+      background: var(--card);
+      padding: 20px;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,0.02);
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+
+    .hobby:hover {
+      transform: translateY(-5px);
+      border-color: rgba(124,58,237,0.3);
+      background: linear-gradient(
+        180deg,
+        rgba(124,58,237,0.1),
+        rgba(124,58,237,0.05)
+      );
+    }
+
+    /* Sections */
+    section{padding:36px 0;border-top:1px solid rgba(255,255,255,0.02)}
+    .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+    .muted{color:var(--muted)}
+    .small{font-size:13px}
+
+    /* Resume */
+    .resume-preview{background:linear-gradient(180deg, rgba(255,255,255,0.01), transparent);padding:14px;border-radius:10px;border:1px solid rgba(255,255,255,0.02)}
+
+    /* Game canvas */
+    #gameCanvas{width:100%;height:360px;background:linear-gradient(180deg,#071026,#0b1020);border-radius:10px;display:block}
+
+    /* Footer */
+    footer{padding:18px 0;color:var(--muted);text-align:center}
+
+    /* Responsive */
+    @media (max-width:980px){.hero{grid-template-columns:1fr;}.wrap{padding:18px}} 
+    @media (max-width:640px){.grid-2{grid-template-columns:1fr}.nav{display:none}}
+
+    /* Micro interactions */
+    .btn{background:linear-gradient(90deg,var(--accent),#5b21b6);color:white;padding:10px 14px;border-radius:10px;border:0;font-weight:700}
+    .card-media{border-radius:10px;overflow:hidden}
+    .fade-in{animation:fadeIn .6s ease both}
+    @keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+
+    /* Game HUD */
+    .hud{display:flex;gap:10px;align-items:center;color:var(--muted);}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div class="brand">
+        <div class="logo">MP</div>
+        <div>
+          <div style="font-weight:700">Max Parker</div>
+          <div class="muted small">Marketing • Outdoors • Student Athlete</div>
+        </div>
+      </div>
+
+      <nav aria-label="Primary navigation" id="mainNav">
+        <a class="nav-link active" data-page="home">Home</a>
+        <a class="nav-link" data-page="hobbies">Hobbies</a>
+        <a class="nav-link" data-page="discover">Discover</a>
+        <a class="nav-link" data-page="resume">Resume</a>
+        <a class="nav-link" data-page="career">Career</a>
+        <a class="nav-link" data-page="game">Game</a>
+      </nav>
+    </header>
+
+    <!-- Pages (SPA) -->
+    <main id="app">
+      <!-- HOME -->
+      <article id="home" class="page fade-in">
+        <div class="hero">
+          <div>
+            <div class="content">
+              <h1>Hi — I'm <span style="color:var(--accent)">Max Parker</span></h1>
+              <div class="tag">Marketing specialist • Student athlete • Outdoor enthusiast</div>
+              <p class="intro">I combine practical marketing experience (Red Bull USA) with a passion for outdoor sports and creative storytelling. I build memorable brand experiences that connect with active audiences and create measurable results.</p>
+              
+              <div class="personal-section scroll-reveal">
+                <div class="profile-image-wrapper">
+                  <img src="images/prof1.jpeg" alt="Max Parker portrait" class="profile-image">
+                  <div class="image-overlay"></div>
+                </div>
+                <div class="bio-content">
+                  <h2 class="bio-title">About Me</h2>
+                  <p class="bio-text">My name is Max Parker. I am from Eagan, Minnesota, and I am a marketing major at the University of Minnesota Duluth. My journey combines athletic dedication with marketing innovation, creating a unique perspective that bridges outdoor culture with strategic brand development. At UMD, I've found the perfect balance between academic excellence and pursuing my passions in snowboarding and lacrosse.</p>
+                </div>
+              </div>
+
+              <style>
+                .personal-section {
+                  margin-top: 4rem;
+                  display: grid;
+                  grid-template-columns: 1fr 1.5fr;
+                  gap: 2rem;
+                  align-items: center;
+                  opacity: 0;
+                  transform: translateY(30px);
+                  transition: all 0.8s ease;
+                }
+
+                .personal-section.reveal {
+                  opacity: 1;
+                  transform: translateY(0);
+                }
+
+                .profile-image-wrapper {
+                  position: relative;
+                  border-radius: 16px;
+                  overflow: hidden;
+                  transform: perspective(1000px);
+                  transition: transform 0.6s ease;
+                }
+
+                .profile-image-wrapper:hover {
+                  transform: perspective(1000px) rotateY(-5deg) translateZ(30px);
+                }
+
+                .profile-image {
+                  width: 100%;
+                  height: auto;
+                  display: block;
+                  transform: scale(1);
+                  transition: transform 0.6s ease;
+                }
+
+                .profile-image-wrapper:hover .profile-image {
+                  transform: scale(1.05);
+                }
+
+                .image-overlay {
+                  position: absolute;
+                  top: 0;
+                  left: 0;
+                  right: 0;
+                  bottom: 0;
+                  background: linear-gradient(
+                    45deg,
+                    rgba(124,58,237,0.2),
+                    rgba(124,58,237,0)
+                  );
+                  opacity: 0;
+                  transition: opacity 0.3s ease;
+                }
+
+                .profile-image-wrapper:hover .image-overlay {
+                  opacity: 1;
+                }
+
+                .bio-content {
+                  padding: 1rem;
+                }
+
+                .bio-title {
+                  font-size: 1.8rem;
+                  margin-bottom: 1rem;
+                  background: linear-gradient(90deg, var(--text), rgba(230,238,248,0.9));
+                  -webkit-background-clip: text;
+                  background-clip: text;
+                  color: transparent;
+                }
+
+                .bio-text {
+                  line-height: 1.8;
+                  color: var(--text-secondary);
+                  font-size: 1.1rem;
+                }
+
+                @media (max-width: 968px) {
+                  .personal-section {
+                    grid-template-columns: 1fr;
+                  }
+
+                  .profile-image-wrapper {
+                    max-width: 500px;
+                    margin: 0 auto;
+                  }
+                }
+              </style>
+
+              <div style="margin-top:14px;display:flex;gap:10px;align-items:center">
+                <button class="btn" onclick="navigate('discover')">Discover more</button>
+                <a href="/mnt/data/Resume 2025.pdf" download class="nav-link" style="padding:8px 12px;border-radius:10px;border:1px solid rgba(255,255,255,0.04)">Download Resume</a>
+              </div>
+
+              <div class="hobby-list">
+                <div class="hobby">
+                  <strong>Snowboarding</strong>
+                  <div class="muted small">Jumping rails, park laps, chasing fresh lines — winter is where strategy meets adrenaline.</div>
+                </div>
+                <div class="hobby">
+                  <strong>Lacrosse</strong>
+                  <div class="muted small">Team-based discipline and quick decision-making on the field — I play at UMD.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <aside class="h-card card-media">
+            <div style="display:grid;grid-template-rows:1fr auto;gap:10px;padding:14px">
+              <img src="/images/prof2.jpg" alt="Portrait Max" class="portrait" style="height:320px;">
+              <div style="display:flex;gap:10px;align-items:center;justify-content:space-between">
+                <div>
+                  <div style="font-weight:700">Professional Headshot</div>
+                  <div class="muted small">University of Minnesota Duluth</div>
+                </div>
+                <div style="text-align:right">
+                  <div class="small muted">Video</div>
+                  <div style="width:120px;height:68px;background:linear-gradient(180deg, rgba(124,58,237,0.12), rgba(124,58,237,0.06));border-radius:8px;display:flex;align-items:center;justify-content:center;color:var(--text);font-weight:700">Video</div>
+                </div>
+              </div>
+            </div>
+          </aside>
+        </div>
+
+        <section aria-labelledby="gallery">
+          <h2 id="gallery">Featured photos</h2>
+          <p class="muted small">A few moments that capture my lifestyle and interests.</p>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px">
+            <div class="h-card card-media"><img src="/mnt/data/DSC06624.jpeg" alt="Portrait 2" style="width:100%;height:320px;object-fit:cover"></div>
+            <div class="h-card card-media"><img src="/mnt/data/6H6A2867.jpeg" alt="Lacrosse action" style="width:100%;height:320px;object-fit:cover"></div>
+          </div>
+        </section>
+      </article>
+
+      <!-- HOBBIES -->
+      <article id="hobbies" class="page" style="display:none">
+        <section class="hobbies-section">
+          <h2 class="section-title scroll-reveal">Passions & Pursuits</h2>
+          <p class="section-intro scroll-reveal">These activities shape who I am — combining athletic drive, creative expression, and a deep connection with the outdoors.</p>
+
+          <div class="hobby-grid">
+            <div class="hobby-card scroll-reveal">
+              <div class="image-container parallax-hover">
+                <img src="images/IMG_9239.jpeg" alt="Snowboarding rail slide" class="hobby-image">
+              </div>
+              <div class="hobby-content">
+                <h3>Snowboarding</h3>
+                <p class="story">From park sessions to backcountry exploration, snowboarding represents the perfect blend of creativity and technical precision. That rail slide captured above at Spirit Mountain showcases years of progression and countless hours perfecting the craft.</p>
+                <p class="impact">Snowboarding teaches me that success comes from pushing boundaries while staying focused. Every session is a chance to try something new, face fears, and emerge stronger. This mindset carries into everything I do.</p>
+              </div>
+            </div>
+
+            <div class="hobby-card scroll-reveal">
+              <div class="image-container parallax-hover">
+                <img src="images/6H6A2867.jpeg" alt="Lacrosse action shot at UMD" class="hobby-image">
+              </div>
+              <div class="hobby-content">
+                <h3>Lacrosse</h3>
+                <p class="story">Playing lacrosse for UMD has been transformative. This shot captures an intense moment during our match against the Broncos — showcasing the split-second decisions and athletic prowess the sport demands.</p>
+                <p class="impact">Lacrosse epitomizes teamwork, strategy, and dedication. As a student-athlete, I've learned invaluable lessons about leadership, time management, and performing under pressure — skills that directly translate to my professional aspirations.</p>
+              </div>
+            </div>
+
+            <div class="hobby-card scroll-reveal">
+              <div class="image-container parallax-hover">
+                <img src="images/outside.jpg" alt="Exploring outdoors" class="hobby-image">
+              </div>
+              <div class="hobby-content">
+                <h3>Outdoor Adventure</h3>
+                <p class="story">The North Shore's rugged beauty provides endless opportunities for exploration. Whether climbing rocky shorelines or hiking through fall colors, each adventure feeds my passion for outdoor storytelling.</p>
+                <p class="impact">These experiences fuel my creative perspective and marketing approach. Understanding the connection between people and nature helps me craft authentic narratives that resonate with outdoor enthusiasts.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="hobby-philosophy scroll-reveal">
+            <h3>Why These Matter</h3>
+            <p>These pursuits represent more than just hobbies — they're fundamental to my character and professional outlook. Each activity combines physical challenge with mental growth, teaching valuable lessons about persistence, creativity, and adaptability. Whether I'm analyzing a snowboard line, coordinating with teammates, or exploring new terrain, I'm building skills that enhance my marketing expertise and leadership capabilities.</p>
+          </div>
+        </section>
+      </article>
+
+      <style>
+        .hobbies-section {
+          padding: 60px 0;
+        }
+        
+        .section-title {
+          font-size: 2.5rem;
+          margin-bottom: 1rem;
+          background: linear-gradient(90deg, var(--text), rgba(230,238,248,0.9));
+          -webkit-background-clip: text;
+          background-clip: text;
+          color: transparent;
+        }
+        
+        .section-intro {
+          font-size: 1.2rem;
+          max-width: 800px;
+          margin-bottom: 3rem;
+        }
+        
+        .hobby-grid {
+          display: grid;
+          gap: 2rem;
+          margin-bottom: 3rem;
+        }
+        
+        .hobby-card {
+          background: var(--surface);
+          border-radius: 16px;
+          overflow: hidden;
+          border: 1px solid rgba(255,255,255,0.03);
+          transition: transform 0.3s ease;
+        }
+        
+        .image-container {
+          position: relative;
+          overflow: hidden;
+          height: 400px;
+        }
+        
+        .hobby-image {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          transition: transform 0.5s ease;
+        }
+        
+        .parallax-hover:hover .hobby-image {
+          transform: scale(1.05) translateY(-2%);
+        }
+        
+        .hobby-content {
+          padding: 2rem;
+        }
+        
+        .hobby-content h3 {
+          font-size: 1.5rem;
+          margin-bottom: 1rem;
+          color: var(--accent);
+        }
+        
+        .story, .impact {
+          margin-bottom: 1rem;
+          line-height: 1.6;
+        }
+        
+        .impact {
+          color: var(--muted);
+        }
+        
+        .hobby-philosophy {
+          background: linear-gradient(180deg, 
+            rgba(124,58,237,0.1), 
+            rgba(124,58,237,0.02)
+          );
+          padding: 2rem;
+          border-radius: 16px;
+          margin-top: 3rem;
+        }
+        
+        .hobby-philosophy h3 {
+          color: var(--accent);
+          margin-bottom: 1rem;
+        }
+        
+        .hobby-philosophy p {
+          line-height: 1.7;
+        }
+        
+        @media (max-width: 768px) {
+          .hobby-grid {
+            grid-template-columns: 1fr;
+          }
+          
+          .image-container {
+            height: 300px;
+          }
+        }
+      </style>
+
+      <!-- DISCOVER -->
+      <article id="discover" class="page" style="display:none">
+        <section>
+          <h2>Discover</h2>
+          <p class="muted">A deeper look at how I approach marketing, storytelling, and the outdoors.</p>
+
+          <div class="grid-2" style="margin-top:18px">
+            <div>
+              <h3>Professional approach</h3>
+              <p class="muted">I blend data-driven marketing with authentic storytelling. My experience includes experiential campaigns, event marketing, and grassroots activation targeting active, outdoors-focused audiences.</p>
+
+              <h3 style="margin-top:14px">Skills</h3>
+              <ul class="muted">
+                <li>Field marketing & experiential events</li>
+                <li>Social media content strategy</li>
+                <li>Excel & analytics</li>
+                <li>Project coordination</li>
+              </ul>
+            </div>
+
+            <div class="h-card card-media" style="padding:14px">
+              <img src="/mnt/data/DSC06612.jpeg" alt="Portrait" style="width:100%;height:220px;object-fit:cover;border-radius:8px;margin-bottom:12px">
+              <h4>Personal notes</h4>
+              <p class="muted">I prioritize clarity in communication, accountability in execution, and continuous learning. Outside work and sport, I enjoy photography, travel, and music.</p>
+            </div>
+          </div>
+        </section>
+      </article>
+
+      <!-- RESUME -->
+      <article id="resume" class="page" style="display:none">
+        <section>
+          <h2>Resume</h2>
+          <p class="muted">Below is a quick preview of my resume — you can download the full PDF.</p>
+
+          <div class="grid-2" style="margin-top:16px">
+            <div class="resume-preview">
+              <iframe src="/mnt/data/Resume 2025.pdf" style="width:100%;height:520px;border:0;border-radius:8px"></iframe>
+            </div>
+
+            <div>
+              <h3>Quick highlights</h3>
+              <ul class="muted">
+                <li>Student Marketeer — Red Bull USA (2025)</li>
+                <li>Experience in event marketing & grassroots activations</li>
+                <li>Strong soft skills: communication, teamwork, and leadership</li>
+                <li>Education: University of Minnesota Duluth</li>
+              </ul>
+
+              <div style="margin-top:16px">
+                <a href="/mnt/data/Resume 2025.pdf" download class="btn">Download full resume (PDF)</a>
+              </div>
+            </div>
+          </div>
+        </section>
+      </article>
+
+      <!-- CAREER -->
+      <article id="career" class="page" style="display:none">
+        <section>
+          <h2>Career</h2>
+          <p class="muted">A short view of my career goals, recent work, and what I'm looking for next.</p>
+
+          <div class="grid-2" style="margin-top:18px">
+            <div>
+              <h3>Current</h3>
+              <p class="muted">Working as a Student Marketeer with Red Bull USA — focused on field activations and consumer engagement.</p>
+
+              <h3 style="margin-top:12px">Goals</h3>
+              <ul class="muted">
+                <li>Lead experiential marketing campaigns</li>
+                <li>Grow skills in digital analytics and brand strategy</li>
+                <li>Work with outdoor-focused brands to design standout activations</li>
+              </ul>
+            </div>
+
+            <div class="h-card" style="padding:16px">
+              <h4>Achievements</h4>
+              <ol class="muted">
+                <li>Organized campus launch events with strong engagement metrics</li>
+                <li>Developed local partnerships to expand brand presence</li>
+                <li>Consistent contributor to social content strategy and execution</li>
+              </ol>
+            </div>
+          </div>
+        </section>
+      </article>
+
+      <!-- GAME -->
+      <article id="game" class="page" style="display:none">
+        <section>
+          <h2>Mini Game — Snowboard Dash</h2>
+          <p class="muted">A small, lightweight game built for fun — control the rider and jump obstacles to score points.</p>
+
+          <div style="margin-top:12px">
+            <canvas id="gameCanvas"></canvas>
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-top:8px">
+              <div class="hud">Score: <span id="score">0</span></div>
+              <div>
+                <button class="btn" id="startBtn">Start</button>
+                <button class="nav-link" id="resetBtn" style="padding:8px 12px;border-radius:8px;border:1px solid rgba(255,255,255,0.04)">Reset</button>
+              </div>
+            </div>
+          </div>
+        </section>
+      </article>
+
+    </main>
+
+    <footer>
+      <div class="muted small">© <span id="year"></span> Max Parker • Built with focus on clarity and performance</div>
+    </footer>
+  </div>
+
+  <script>
+    // Generate stars
+    function createStars() {
+      const starsContainer = document.createElement('div');
+      starsContainer.className = 'stars';
+      
+      for (let i = 0; i < 50; i++) {
+        const star = document.createElement('div');
+        star.className = 'star';
+        
+        // Random position
+        star.style.left = `${Math.random() * 100}%`;
+        star.style.top = `${Math.random() * 100}%`;
+        
+        // Random size
+        const size = Math.random() * 2 + 1;
+        star.style.width = `${size}px`;
+        star.style.height = `${size}px`;
+        
+        // Random twinkle
+        star.style.setProperty('--twinkle-duration', `${Math.random() * 3 + 2}s`);
+        star.style.setProperty('--twinkle-delay', `${Math.random() * 2}s`);
+        
+        starsContainer.appendChild(star);
+      }
+      
+      document.querySelector('header').appendChild(starsContainer);
+    }
+    
+    // Scroll reveal
+    function createObserver() {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('reveal');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, {
+        threshold: 0.1
+      });
+      
+      document.querySelectorAll('.scroll-reveal').forEach(el => observer.observe(el));
+    }
+    
+    // Header scroll behavior
+    let lastScroll = 0;
+    function handleScroll() {
+      const currentScroll = window.pageYOffset;
+      const header = document.querySelector('header');
+      
+      if (currentScroll <= 0) {
+        header.classList.remove('scrolled', 'scroll-up');
+        return;
+      }
+      
+      if (currentScroll > lastScroll && !header.classList.contains('scrolled')) {
+        // Scroll down
+        header.classList.add('scrolled');
+        header.classList.remove('scroll-up');
+      } else if (currentScroll < lastScroll && header.classList.contains('scrolled')) {
+        // Scroll up
+        header.classList.remove('scrolled');
+        header.classList.add('scroll-up');
+      }
+      
+      lastScroll = currentScroll;
+    }
+    
+    // Initialize everything
+    document.addEventListener('DOMContentLoaded', () => {
+      createStars();
+      createObserver();
+      window.addEventListener('scroll', handleScroll);
+    });
+    
+    // Basic SPA navigation
+    const pages = document.querySelectorAll('.page');
+    const links = document.querySelectorAll('.nav-link');
+    function navigate(page){
+      pages.forEach(p=>p.style.display='none');
+      document.getElementById(page).style.display='block';
+      links.forEach(l=>l.classList.remove('active'));
+      document.querySelectorAll(`.nav-link[data-page='${page}']`).forEach(e=>e.classList.add('active'));
+      window.scrollTo({top:0,behavior:'smooth'});
+    }
+    links.forEach(l=>l.addEventListener('click',()=>navigate(l.dataset.page)));
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Enhanced Snowboard Dash Game
+    const canvas = document.getElementById('gameCanvas');
+    const ctx = canvas.getContext('2d');
+    
+    // Game assets
+    const sprites = {
+      rider: new Image(),
+      mountain: new Image(),
+      tree: new Image()
+    };
+    
+    sprites.rider.src = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDIiIGhlaWdodD0iMjgiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZD0iTTIxIDJjNSAwIDkgNCA5IDlzLTQgOS05IDktOC00LTgtOSA0LTkgOC05eiIgZmlsbD0iI2ZmZiIvPjxwYXRoIGQ9Ik00IDIwaDM0djZINHoiIGZpbGw9IiM3YzNhZWQiLz48L3N2Zz4=';
+    
+    function resize() {
+      canvas.width = canvas.clientWidth * devicePixelRatio;
+      canvas.height = 360 * devicePixelRatio;
+      ctx.scale(devicePixelRatio, devicePixelRatio);
+    }
+    
+    resize();
+    window.addEventListener('resize', resize);
+    
+    let running = false;
+    let score = 0;
+    const scoreEl = document.getElementById('score');
+    const startBtn = document.getElementById('startBtn');
+    const resetBtn = document.getElementById('resetBtn');
+    
+    // Game objects
+    const rider = {
+      x: 80,
+      y: 260,
+      w: 42,
+      h: 28,
+      vy: 0,
+      ground: 280,
+      jumping: false,
+      rotation: 0
+    };
+    
+    const obstacles = [];
+    const particles = [];
+    
+    class Particle {
+      constructor(x, y) {
+        this.x = x;
+        this.y = y;
+        this.vx = (Math.random() - 0.5) * 4;
+        this.vy = -Math.random() * 4 - 2;
+        this.alpha = 1;
+      }
+      
+      update() {
+        this.x += this.vx;
+        this.y += this.vy;
+        this.vy += 0.1;
+        this.alpha -= 0.02;
+      }
+      
+      draw() {
+        ctx.fillStyle = `rgba(124, 58, 237, ${this.alpha})`;
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, 2, 0, Math.PI * 2);
+        ctx.fill();
+      }
+    }
+    
+    function spawnObstacle() {
+      const h = 24 + Math.random() * 26;
+      obstacles.push({
+        x: canvas.clientWidth + 20,
+        y: 280 - h,
+        w: 22,
+        h,
+        passed: false
+      });
+    }
+    
+    function createParticles(x, y) {
+      for (let i = 0; i < 10; i++) {
+        particles.push(new Particle(x, y));
+      }
+    }
+    
+    function startGame() {
+      obstacles.length = 0;
+      particles.length = 0;
+      score = 0;
+      running = true;
+      rider.y = rider.ground;
+      rider.vy = 0;
+      rider.jumping = false;
+      rider.rotation = 0;
+      spawnObstacle();
+      loop();
+      startBtn.textContent = 'Pause';
+    }
+    
+    function resetGame() {
+      running = false;
+      score = 0;
+      scoreEl.textContent = score;
+      rider.rotation = 0;
+      draw();
+      startBtn.textContent = 'Start';
+    }
+    
+    function loop() {
+      if (!running) return;
+      update();
+      draw();
+      requestAnimationFrame(loop);
+    }
+    
+    function update() {
+      // Rider physics
+      if (rider.jumping) {
+        rider.vy += 0.7;
+        rider.y += rider.vy;
+        rider.rotation = Math.min(rider.vy * 2, 45);
+        
+        if (rider.y >= rider.ground) {
+          rider.y = rider.ground;
+          rider.vy = 0;
+          rider.jumping = false;
+          rider.rotation = 0;
+          createParticles(rider.x + rider.w / 2, rider.ground);
+        }
+      }
+      
+      // Obstacles
+      for (let i = obstacles.length - 1; i >= 0; i--) {
+        const obs = obstacles[i];
+        obs.x -= 6;
+        
+        if (!obs.passed && obs.x + obs.w < rider.x) {
+          obs.passed = true;
+          score += 1;
+          scoreEl.textContent = score;
+        }
+        
+        if (obs.x + obs.w < 0) {
+          obstacles.splice(i, 1);
+        }
+      }
+      
+      // Spawn new obstacles
+      if (Math.random() < 0.02) spawnObstacle();
+      
+      // Update particles
+      for (let i = particles.length - 1; i >= 0; i--) {
+        particles[i].update();
+        if (particles[i].alpha <= 0) particles.splice(i, 1);
+      }
+      
+      // Collision detection
+      for (const obs of obstacles) {
+        if (obs.x < rider.x + rider.w * 0.8 &&
+            obs.x + obs.w > rider.x + rider.w * 0.2 &&
+            obs.y < rider.y + rider.h &&
+            obs.y + obs.h > rider.y) {
+          running = false;
+          startBtn.textContent = 'Restart';
+          createParticles(rider.x + rider.w / 2, rider.y + rider.h / 2);
+        }
+      }
+    }
+    
+    function draw() {
+      // Clear and draw background
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      
+      // Draw sky gradient
+      const gradient = ctx.createLinearGradient(0, 0, 0, canvas.height);
+      gradient.addColorStop(0, '#071026');
+      gradient.addColorStop(1, '#0d1a2a');
+      ctx.fillStyle = gradient;
+      ctx.fillRect(0, 0, canvas.clientWidth, 360);
+      
+      // Draw mountains
+      ctx.fillStyle = '#0a1522';
+      for (let i = 0; i < 3; i++) {
+        ctx.beginPath();
+        ctx.moveTo(-50 + i * 200, 300);
+        ctx.lineTo(50 + i * 200, 200);
+        ctx.lineTo(150 + i * 200, 300);
+        ctx.fill();
+      }
+      
+      // Draw ground with snow effect
+      ctx.fillStyle = '#f8fafc';
+      ctx.fillRect(0, 300, canvas.clientWidth, 60);
+      
+      // Draw particles
+      particles.forEach(p => p.draw());
+      
+      // Draw obstacles (trees)
+      ctx.fillStyle = '#064e3b';
+      for (const obs of obstacles) {
+        ctx.beginPath();
+        ctx.moveTo(obs.x + obs.w / 2, obs.y);
+        ctx.lineTo(obs.x + obs.w, obs.y + obs.h);
+        ctx.lineTo(obs.x, obs.y + obs.h);
+        ctx.fill();
+      }
+      
+      // Draw rider with rotation
+      ctx.save();
+      ctx.translate(rider.x + rider.w / 2, rider.y + rider.h / 2);
+      ctx.rotate(rider.rotation * Math.PI / 180);
+      ctx.drawImage(sprites.rider, -rider.w / 2, -rider.h / 2, rider.w, rider.h);
+      ctx.restore();
+      
+      // Draw score
+      ctx.fillStyle = '#ffffff';
+      ctx.font = 'bold 20px Inter';
+      ctx.fillText(`Score: ${score}`, 20, 40);
+      
+      // Draw game instructions
+      if (!running) {
+        ctx.fillStyle = 'rgba(0,0,0,0.8)';
+        ctx.fillRect(canvas.clientWidth / 2 - 150, 140, 300, 80);
+        ctx.fillStyle = '#ffffff';
+        ctx.textAlign = 'center';
+        ctx.fillText('Press SPACE or tap to jump', canvas.clientWidth / 2, 180);
+        ctx.fillText('Avoid the trees!', canvas.clientWidth / 2, 200);
+        ctx.textAlign = 'left';
+      }
+    }
+
+    // controls
+    window.addEventListener('keydown',(e)=>{ if(e.code==='Space'){ if(!running){ startGame(); startBtn.textContent='Playing'; } else { if(!rider.jumping){ rider.vy=-12; rider.jumping=true; } } }});
+    canvas.addEventListener('click',()=>{ if(!running){ startGame(); startBtn.textContent='Playing'; } else { if(!rider.jumping){ rider.vy=-12; rider.jumping=true; } } });
+    startBtn.addEventListener('click',()=>{ if(!running) startGame(); else running=false; });
+    resetBtn.addEventListener('click',resetGame);
+
+    // initial draw
+    draw();
+
+    // ensure home visible initially
+    navigate('home');
+  </script>
+</body>
+</html>
