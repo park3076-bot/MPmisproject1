@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Career — Max Parker</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+  <link href="CSS/styles.css" rel="stylesheet">
+</head>
+<body>
+  <div class="home-background"></div>
+  <div class="wrap">
+    <header>
+      <div class="brand">
+        <div class="logo">MP</div>
+        <div>
+          <div style="font-weight:700">Max Parker</div>
+          <div class="muted small">Marketing • Outdoors • Student Athlete</div>
+        </div>
+      </div>
+
+      <nav aria-label="Primary navigation" id="mainNav">
+        <a class="nav-link" href="index.html">Home</a>
+        <a class="nav-link" href="hobbies.html">Hobbies</a>
+        <a class="nav-link" href="discover.html">Discover</a>
+        <a class="nav-link" href="resume.html">Resume</a>
+        <a class="nav-link active" href="career.html">Career</a>
+        <a class="nav-link" href="game.html">Game</a>
+      </nav>
+    </header>
+
+    <main style="margin-top: 120px;">
+      <section>
+        <h1 class="hero-title">Career</h1>
+        <p class="muted">A strategic view of my professional journey, current role, and future aspirations in marketing.</p>
+
+        <div class="grid-2" style="margin-top: 48px;">
+          <div class="h-card">
+            <h3>Current Position</h3>
+            <div class="highlight" style="color: var(--accent); font-weight: 600; font-size: 1.1rem; margin: 12px 0;">
+              Student Marketeer — Red Bull USA
+            </div>
+            <p class="muted">Focused on field activations and consumer engagement across campus and local markets. Leading grassroots marketing initiatives that connect active audiences with authentic brand experiences.</p>
+            
+            <h4 style="margin-top: 24px; color: var(--accent);">Key Responsibilities</h4>
+            <ul class="muted">
+              <li>Design and execute on-campus marketing campaigns</li>
+              <li>Build strategic partnerships with student organizations</li>
+              <li>Develop content for social media and event promotion</li>
+              <li>Organize sampling events and brand activations</li>
+              <li>Collect and analyze consumer feedback for brand strategy</li>
+            </ul>
+          </div>
+
+          <div class="h-card">
+            <h3>Career Goals</h3>
+            <p class="muted">Building towards leadership roles in experiential marketing with a focus on outdoor and action sports brands.</p>
+            
+            <div style="margin-top: 20px;">
+              <h4 style="color: var(--accent);">Short-term Objectives</h4>
+              <ul class="muted">
+                <li>Lead comprehensive experiential marketing campaigns</li>
+                <li>Master digital analytics and brand strategy frameworks</li>
+                <li>Develop expertise in outdoor-focused brand partnerships</li>
+              </ul>
+              
+              <h4 style="margin-top: 20px; color: var(--accent);">Long-term Vision</h4>
+              <ul class="muted">
+                <li>Become a brand strategy director for premium outdoor brands</li>
+                <li>Create signature marketing campaigns that define industry standards</li>
+                <li>Build lasting connections between brands and outdoor communities</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="h-card" style="margin-top: 32px; padding: 32px;">
+          <h3>Professional Achievements</h3>
+          <div class="achievements-grid">
+            <div class="achievement-item">
+              <div class="achievement-number">01</div>
+              <div class="achievement-content">
+                <h4>Campus Launch Excellence</h4>
+                <p class="muted">Successfully organized and executed multi-phase campus launch events that achieved 300% above projected engagement metrics, establishing Red Bull's presence as the leading energy drink among UMD students.</p>
+              </div>
+            </div>
+            
+            <div class="achievement-item">
+              <div class="achievement-number">02</div>
+              <div class="achievement-content">
+                <h4>Partnership Development</h4>
+                <p class="muted">Developed and maintained strategic partnerships with 15+ student organizations, expanding brand presence across diverse campus demographics and increasing event attendance by 150%.</p>
+              </div>
+            </div>
+            
+            <div class="achievement-item">
+              <div class="achievement-number">03</div>
+              <div class="achievement-content">
+                <h4>Content Strategy Leadership</h4>
+                <p class="muted">Consistently contributed to social content strategy and execution, creating content that generated 40% higher engagement rates than regional averages and strengthened brand authenticity.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="h-card" style="margin-top: 32px;">
+          <h3>Professional Philosophy</h3>
+          <p class="muted" style="line-height: 1.8; font-size: 1.1rem;">
+            I believe the most effective marketing happens at the intersection of authentic experience and strategic storytelling. My approach combines rigorous analytics with genuine understanding of how people connect with brands in meaningful ways. Whether I'm organizing a campus activation or developing content strategy, I focus on creating moments that feel natural and exciting rather than forced or commercial.
+          </p>
+          <p class="muted" style="line-height: 1.8; font-size: 1.1rem; margin-top: 16px;">
+            This philosophy drives everything I do — from the way I approach team collaboration to how I measure success. I'm not just interested in short-term metrics; I want to build lasting connections between brands and communities that enrich both sides of the equation.
+          </p>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="muted small">© <span id="year"></span> Max Parker • Career</div>
+    </footer>
+  </div>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
