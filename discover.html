@@ -6,6 +6,45 @@
   <title>Discover — Max Parker</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
   <link href="CSS/styles.css" rel="stylesheet">
+  <style>
+    /* Video section styles */
+    .video-card {
+      transition: all 0.3s ease;
+    }
+    
+    .video-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+      border-color: rgba(124, 58, 237, 0.3);
+    }
+    
+    .video-icon {
+      transition: all 0.3s ease;
+    }
+    
+    .video-card:hover .video-icon {
+      transform: scale(1.1);
+      box-shadow: 0 0 20px rgba(139, 0, 0, 0.4);
+    }
+
+    @media (max-width: 768px) {
+      .video-card {
+        padding: 40px 24px;
+        min-height: 350px;
+      }
+      
+      .video-icon {
+        width: 60px;
+        height: 60px;
+        margin-bottom: 20px;
+      }
+      
+      .video-icon svg {
+        width: 24px;
+        height: 24px;
+      }
+    }
+  </style>
 </head>
 <body>
   <div class="home-background"></div>
@@ -123,6 +162,33 @@
           <p class="muted" style="line-height: 1.8; font-size: 1.1rem; margin-top: 16px;">
             My ultimate goal is to lead marketing that feels as good to create as it does to experience—campaigns that people remember not because they were sold to, but because they felt understood, inspired, and invited to be part of something bigger than themselves.
           </p>
+        </div>
+
+        <div class="h-card" style="margin-top: 32px; text-align: center; padding: 40px;">
+          <h2>UMD Marketing Video</h2>
+          <p class="muted" style="margin-bottom: 32px; font-size: 1.1rem; line-height: 1.6;">
+            See how University of Minnesota Duluth approaches marketing and student life through this institutional showcase.
+          </p>
+          
+          <div style="position: relative; max-width: 800px; margin: 0 auto;">
+            <div class="video-card" style="background: linear-gradient(135deg, var(--surface), rgba(255,255,255,0.02)); border: 1px solid rgba(255,255,255,0.1); border-radius: 16px; padding: 60px 40px; min-height: 400px; display: flex; flex-direction: column; align-items: center; justify-content: center;">
+              <div class="video-icon" style="width: 80px; height: 80px; background: linear-gradient(135deg, #8B0000, #CD5C5C); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 24px;">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="white" style="margin-left: 4px;">
+                  <path d="M8 5v14l11-7z"/>
+                </svg>
+              </div>
+              <h3 style="color: var(--text); margin-bottom: 16px;">UMD Marketing Showcase</h3>
+              <p class="muted" style="max-width: 500px; margin-bottom: 24px;">
+                An official video highlighting the University of Minnesota Duluth's approach to student engagement and campus marketing.
+              </p>
+              <a href="#" class="cta-primary" style="text-decoration: none; display: inline-flex; align-items: center; gap: 8px; background: linear-gradient(135deg, #8B0000, #CD5C5C);">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M8 5v14l11-7z"/>
+                </svg>
+                Watch UMD Video
+              </a>
+            </div>
+          </div>
         </div>
       </section>
     </main>
